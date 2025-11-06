@@ -18,6 +18,13 @@ vi.mock("./components/Navigation/Navigation.tsx", () => ({
 		</div>
 	),
 }));
+vi.mock("./components/Sidebar/Sidebar.tsx", () => ({
+	default: () => (
+		<div>
+			<p>SIDEBAR</p>
+		</div>
+	),
+}));
 
 // Suite
 describe("App component", () => {
@@ -40,5 +47,10 @@ describe("App component", () => {
 	it("should properly render the 'Menu' button correctly", () => {
 		renderComponent();
 		expect(screen.getByRole("button", { name: "Menu" })).toBeInTheDocument();
+	});
+
+	it("should properly render the 'Sidebar' button correctly", () => {
+		renderComponent();
+		expect(screen.getByText("SIDEBAR")).toBeInTheDocument();
 	});
 });
