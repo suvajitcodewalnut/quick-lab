@@ -33,7 +33,7 @@ jobs:
         run: bun install
 
       - name: Build project
-        run: bun run build -- --no-lint
+        run: bun run build
 
   test:
     runs-on: ubuntu-latest
