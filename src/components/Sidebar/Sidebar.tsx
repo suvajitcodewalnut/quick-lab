@@ -3,7 +3,7 @@ import useScreenSize from "../../hooks/useScreenSize";
 import { useSidebar } from "../../store/useSidebar";
 import Dashboard from "../Dashboard/Dashboard";
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const size = useScreenSize();
   const { isOpen } = useSidebar();
 
