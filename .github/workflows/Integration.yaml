@@ -2,9 +2,9 @@ name: Build and Test
 
 on:
   push:
-    branches: ['master']
+    branches: ["master"]
   pull_request:
-    branches: ['master']
+    branches: ["master"]
 
 jobs:
   build:
@@ -29,10 +29,10 @@ jobs:
       - name: Add Bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
+      - name: Install dependencies (with Bun)
         run: bun install
 
-      - name: Build project
+      - name: Build project (with Bun)
         run: bun run build
 
   test:
@@ -57,8 +57,9 @@ jobs:
       - name: Add Bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
+      - name: Install dependencies (with Bun)
         run: bun install
 
-      - name: Run tests
-        run: bun run application:test
+      # Run Vitest using Node instead of Bun to prevent jsdom crash
+      - name: Run tests (Vitest in Node environment)
+        run: npx vitest run --environment jsdom --coverage
