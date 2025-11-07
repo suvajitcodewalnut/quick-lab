@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
 	return (
 		<div
 			className={`${
-				size.width > 500 ? "w-95" : "w-80"
+				size.width > 500 ? "w-95" : "w-90"
 			} z-1000 fixed top-0 right-0 h-full border-l-2 border-white bg-[#050a12] transform transition-transform duration-300 ${
 				isOpen ? "translate-x-0" : "translate-x-full"
 			}`}
