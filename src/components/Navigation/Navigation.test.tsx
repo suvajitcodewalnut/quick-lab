@@ -10,7 +10,7 @@ import {
 import Navigation from "./Navigation";
 
 // Render
-const renderComponent = () => render(<Navigation />);
+const renderComponent = () => render(<Navigation onFormModalOpen={vi.fn()} />);
 
 // Suite
 describe("Navigation", () => {
