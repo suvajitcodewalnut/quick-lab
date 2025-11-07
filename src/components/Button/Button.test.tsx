@@ -1,12 +1,14 @@
-// src/components/Button/Button.test.tsx
+// Modules
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 import Button from "./Button";
 
+// Render
 const renderComponent = (onOpenMock = vi.fn()) =>
 	render(<Button onConfirmationModalOpen={onOpenMock} />);
 
+// Suite
 describe("Button", () => {
 	it("should render the Button component", () => {
 		const onOpenMock = vi.fn();
