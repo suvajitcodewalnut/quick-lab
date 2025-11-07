@@ -1,43 +1,21 @@
 // Modules
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { type Mock, vi } from "vitest";
+import {
+	setupDefaultMockups,
+	toggleSidebarMock,
+	useScreenSizeMock,
+	useSidebarMock,
+} from "../../mocks/mock";
 import Navigation from "./Navigation";
 
-// Helper
-const renderComponent = () => ({
-	user: userEvent.setup(),
-	...render(<Navigation />),
-});
-
-// Mock
-vi.mock("../../store/useSidebar", () => ({
-	useSidebar: vi.fn(),
-}));
-
-vi.mock("../../hooks/useScreenSize", () => ({
-	__esModule: true,
-	default: vi.fn(),
-}));
+// Render
+const renderComponent = () => render(<Navigation />);
 
 // Suite
-describe("Navigation component", () => {
-	const toggleSidebarMock = vi.fn();
-
-	beforeEach(async () => {
-		vi.resetAllMocks();
-
-		// Default Zustand mock
-		const { useSidebar } = await import("../../store/useSidebar");
-		(useSidebar as unknown as Mock).mockReturnValue({
-			isOpen: false,
-			toggleSidebar: toggleSidebarMock,
-		});
-
-		// Default screen size mock
-		const useScreenSize = (await import("../../hooks/useScreenSize"))
-			.default as Mock;
-		useScreenSize.mockReturnValue({ width: 1024, height: 768 });
+describe("Navigation", () => {
+	beforeEach(() => {
+		setupDefaultMockups();
 	});
 
 	it("should render QUICKLAB title and buttons", () => {
@@ -51,40 +29,56 @@ describe("Navigation component", () => {
 	});
 
 	it("should call toggleSidebar when the menu button is clicked", async () => {
-		const { user } = renderComponent();
+		renderComponent();
 
 		const menuButton = screen.getByRole("button", { name: /menu/i });
-		await user.click(menuButton);
+		await userEvent.click(menuButton);
 
 		expect(toggleSidebarMock).toHaveBeenCalledTimes(1);
 	});
 
-	it("should show the right icon depending on isOpen state", async () => {
-		const { useSidebar } = await import("../../store/useSidebar");
-
-		(useSidebar as unknown as Mock).mockReturnValue({
+	it("should show menu-icon when isOpen is false", () => {
+		useSidebarMock.mockReturnValue({
 			isOpen: false,
 			toggleSidebar: toggleSidebarMock,
 		});
-		renderComponent();
-		expect(screen.getByTestId("menu-icon")).toBeInTheDocument();
 
-		(useSidebar as unknown as Mock).mockReturnValue({
+		renderComponent();
+
+		expect(
+			screen.getByRole("button", { name: /menu-icon/i }),
+		).toBeInTheDocument();
+	});
+
+	it("should show menu-close-icon when isOpen is true", () => {
+		useSidebarMock.mockReturnValue({
 			isOpen: true,
 			toggleSidebar: toggleSidebarMock,
 		});
+
 		renderComponent();
-		expect(screen.getByTestId("close-icon")).toBeInTheDocument();
+
+		expect(
+			screen.getByRole("button", { name: /menu-close-icon/i }),
+		).toBeInTheDocument();
 	});
 
-	it("should hide button labels when width ≤ 500", async () => {
-		const useScreenSize = (await import("../../hooks/useScreenSize"))
-			.default as Mock;
-		useScreenSize.mockReturnValue({ width: 400, height: 800 });
+	it("should hide button labels when width ≤ 500", () => {
+		useScreenSizeMock.mockReturnValue({ width: 400, height: 800 });
 
 		renderComponent();
 
-		expect(screen.queryByText(/add ticket/i)).not.toBeInTheDocument();
-		expect(screen.queryByText(/menu/i)).not.toBeInTheDocument();
+		// When width <= 500, the text should be empty string
+		const buttons = screen.getAllByRole("button");
+		const addTicketButton = buttons[0];
+		const menuButton = buttons[1];
+
+		// The buttons should exist but without text labels (only icons)
+		expect(addTicketButton).toBeInTheDocument();
+		expect(menuButton).toBeInTheDocument();
+
+		// The text content should only be empty string (icons don't have text content)
+		expect(addTicketButton.textContent?.trim()).toBe("");
+		expect(menuButton.textContent?.trim()).toBe("");
 	});
 });

@@ -1,4 +1,5 @@
 // Modules
+import type React from "react";
 import { Toaster } from "react-hot-toast";
 import Navigation from "./components/Navigation/Navigation";
 import Sidebar from "./components/Sidebar/Sidebar";

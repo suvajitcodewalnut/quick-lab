@@ -1,5 +1,6 @@
 // Modules
-import useScreenSize from "../../hooks/useScreenSize";
+import type React from "react";
+import { useScreenSize } from "../../hooks/useScreenSize";
 import { useSidebar } from "../../store/useSidebar";
 import Dashboard from "../Dashboard/Dashboard";
 
