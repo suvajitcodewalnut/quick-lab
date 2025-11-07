@@ -19,7 +19,7 @@ const Navigation: React.FC = () => {
 						src="public\logo.png"
 						alt="application-quicklab-logo"
 					/>
-					<h1 className="text-white font-bold">QUICKLAB</h1>
+					<h1 className="text-white font-bold text-2xl">QUICKLAB</h1>
 				</div>
 				<div className="flex items-center justify-center gap-3">
 					<button

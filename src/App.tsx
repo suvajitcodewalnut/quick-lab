@@ -1,6 +1,7 @@
 // Modules
 import type React from "react";
 import { Toaster } from "react-hot-toast";
+import Card from "./components/Card/Card";
 import Navigation from "./components/Navigation/Navigation";
 import Sidebar from "./components/Sidebar/Sidebar";
 
@@ -24,8 +25,16 @@ const App: React.FC = () => {
 					<Sidebar />
 					<div className="px-5 py-7 md:px-10 lg:px-25">
 						<div
-							className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3`}
-						></div>
+							className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5`}
+						>
+							<Card
+								title="Login fix"
+								description="Users are unable to login to the application and redirected to the 404 error page"
+								assignedTo="suvajit@codewalnut.com"
+								priority="High"
+								markComplete={() => null}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
