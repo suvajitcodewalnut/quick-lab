@@ -9,7 +9,7 @@ export const TicketSchemaValidators = z.object({
 	description: z
 		.string()
 		.min(10, "Description must be at least 10 characters!")
-		.max(100, "Description too long!"),
+		.max(150, "Description too long!"),
 	assignedTo: z.email("Please provide a valid email address!"),
 	priority: z
 		.string()

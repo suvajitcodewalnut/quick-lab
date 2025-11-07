@@ -5,7 +5,7 @@ import { toastSuccessMock } from "../../../mocks/mock";
 import Form from "./Form";
 
 // Render
-const renderComponent = () => render(<Form />);
+const renderComponent = () => render(<Form onFormModalClose={vi.fn()} />);
 
 // Suite
 describe("Form", () => {

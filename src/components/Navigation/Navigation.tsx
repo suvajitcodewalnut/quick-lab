@@ -1,12 +1,13 @@
 // Modules
-import type React from "react";
+import type { JSX } from "react";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { LuArrowRightToLine } from "react-icons/lu";
 import { PiTicketFill } from "react-icons/pi";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useSidebar } from "../../store/useSidebar";
+import type { NavigationPropTypes } from "./Navigation.types";
 
-const Navigation: React.FC = () => {
+const Navigation = ({ onFormModalOpen }: NavigationPropTypes): JSX.Element => {
 	const size = useScreenSize();
 	const { isOpen, toggleSidebar } = useSidebar();
 
@@ -24,6 +25,7 @@ const Navigation: React.FC = () => {
 				<div className="flex items-center justify-center gap-3">
 					<button
 						type="button"
+						onClick={onFormModalOpen}
 						className="text-xs font-bold flex items-center border-2 border-white px-2 py-1 gap-1 rounded-full bg-white text-black hover:scale-105 transition-all duration-200 hover:cursor-pointer"
 					>
 						<PiTicketFill size={25} className="text-black" />
