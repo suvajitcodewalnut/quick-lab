@@ -1,9 +1,13 @@
 // Modules
 import { act, renderHook } from "@testing-library/react";
-import useScreenSize from "../useScreenSize";
+import { vi } from "vitest";
+import { useScreenSize } from "../useScreenSize";
+
+// Unmock the hook for this test file to test the actual implementation
+vi.unmock("../useScreenSize");
 
 // Suite
-describe("useScreenSize hook", () => {
+describe("useScreenSize", () => {
 	it("should update the size when window is resized", () => {
 		window.innerWidth = 1000;
 		window.innerHeight = 800;

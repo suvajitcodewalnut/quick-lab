@@ -2,9 +2,9 @@ name: Build and Test
 
 on:
   push:
-    branches: ['main']
+    branches: ["master"]
   pull_request:
-    branches: ['main']
+    branches: ["master"]
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -29,18 +29,28 @@ jobs:
       - name: Add Bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
-        run: bun install
+      # ⚡ Cache Bun dependencies for faster builds
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: Build project
-        run: bun run build -- --no-lint
+      - name: Install dependencies (with Bun)
+        run: bun install --frozen-lockfile
+
+      - name: Build project (with Bun)
+        run: bun run build
 
   test:
     runs-on: ubuntu-latest
 
     strategy:
+      # ⚙️ Drop Node 18 — Vitest v4+ requires 20+
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [20.x, 22.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -57,8 +67,18 @@ jobs:
       - name: Add Bun to PATH
         run: echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      - name: Install dependencies
-        run: bun install
+      # ⚡ Cache Bun dependencies for faster test runs
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: Run tests
-        run: bun run test
+      - name: Install dependencies (with Bun)
+        run: bun install --frozen-lockfile
+
+      # ✅ Run Vitest in Node environment (not Bun) to avoid jsdom crash
+      - name: Run tests (Vitest in Node environment)
+        run: npx vitest run --environment jsdom --coverage
