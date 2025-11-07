@@ -5,6 +5,7 @@ import { vi } from "vitest";
 export const toggleSidebarMock = vi.fn();
 export const useSidebarMock = vi.fn();
 export const useScreenSizeMock = vi.fn();
+export const toastSuccessMock = vi.fn();
 
 // Mock the modules
 vi.mock("../store/useSidebar", () => ({
@@ -14,6 +15,18 @@ vi.mock("../store/useSidebar", () => ({
 vi.mock("../hooks/useScreenSize", () => ({
 	useScreenSize: () => useScreenSizeMock(),
 }));
+
+// Mock react-hot-toast
+vi.mock("react-hot-toast", async (importOriginal) => {
+	const actual = await importOriginal();
+	return {
+		...actual,
+		default: {
+			...actual.default,
+			success: toastSuccessMock,
+		},
+	};
+});
 
 // Setup default mock return values
 export function setupDefaultMockups() {
