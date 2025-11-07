@@ -2,6 +2,7 @@
 
 import { zodResolver as zod } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
+import type { JSX } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { IoCloseCircle } from "react-icons/io5";
@@ -10,17 +11,18 @@ import {
 	type TicketFormData,
 	TicketSchemaValidators,
 } from "../../../validations/Ticket.schema";
+import type { FormPropTypes } from "./Form.types";
 
-const Form: React.FC = () => {
+const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<TicketFormData>({ resolver: zod(TicketSchemaValidators) });
 
-	const onSubmit = (data: TicketFormData) => {
+	const onSubmit = () => {
 		toast.success("TICKET CREATED SUCCESSFULLY!");
-		console.log("FORM VALIDATION DONE !", { data });
+		onFormModalClose();
 	};
 
 	return (
@@ -38,6 +40,7 @@ const Form: React.FC = () => {
 					</h2>
 					<button
 						type="button"
+						onClick={onFormModalClose}
 						className="text-gray-400 hover:text-red-500 hover:cursor-pointer transition"
 						aria-label="Close"
 					>
