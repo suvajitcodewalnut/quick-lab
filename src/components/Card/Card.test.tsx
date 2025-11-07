@@ -17,6 +17,7 @@ const renderComponent = (
 			priority={priority}
 			assignedTo={assignedTo}
 			markComplete={vi.fn()}
+			deleteTicket={vi.fn()}
 			{...additional}
 		/>,
 	);

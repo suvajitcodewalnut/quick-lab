@@ -10,6 +10,7 @@ const Card = ({
 	priority,
 	assignedTo,
 	markComplete,
+	deleteTicket,
 }: CardPropTypes): JSX.Element => {
 	return (
 		<div className="flex flex-col justify-between h-full min-h-[200px] border-2 border-white bg-[#0b0f19] p-5 rounded-2xl hover:cursor-pointer hover:scale-[1.02] transition-all duration-200 shadow-lg sm:min-h-[220px] md:min-h-60 lg:min-h-[260px]">
@@ -26,7 +27,7 @@ const Card = ({
 							type="button"
 							aria-label="button-delete"
 							title="Delete Task"
-							onClick={() => null}
+							onClick={deleteTicket}
 							className="hover:text-red-500 text-white transition-colors"
 						>
 							<AiFillDelete size={22} />
