@@ -2,6 +2,7 @@
 import type React from "react";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
+import Button from "./components/Button/Button";
 import Card from "./components/Card/Card";
 import Confirmation from "./components/Modal/Confirmation/Confirmation";
 import Form from "./components/Modal/Form/Form";
@@ -51,6 +52,11 @@ const App: React.FC = () => {
 								deleteTicket={() => setIsConfirmationModalOpen(true)}
 							/>
 						</div>
+					</div>
+					<div>
+						<Button
+							onConfirmationModalOpen={() => setIsConfirmationModalOpen(true)}
+						/>
 					</div>
 				</div>
 			</div>
