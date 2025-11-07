@@ -4,4 +4,5 @@ export interface CardPropTypes {
 	priority: string;
 	assignedTo: string;
 	markComplete: () => void;
+	deleteTicket: () => void;
 }

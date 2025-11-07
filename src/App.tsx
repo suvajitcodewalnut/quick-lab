@@ -3,12 +3,16 @@ import type React from "react";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Card from "./components/Card/Card";
+import Confirmation from "./components/Modal/Confirmation/Confirmation";
 import Form from "./components/Modal/Form/Form";
 import Navigation from "./components/Navigation/Navigation";
 import Sidebar from "./components/Sidebar/Sidebar";
 
 const App: React.FC = () => {
 	const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
+	const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
+		useState<boolean>(false);
+
 	return (
 		<>
 			<Toaster
@@ -29,6 +33,11 @@ const App: React.FC = () => {
 					{isFormModalOpen && (
 						<Form onFormModalClose={() => setIsFormModalOpen(false)} />
 					)}
+					{isConfirmationModalOpen && (
+						<Confirmation
+							onConfirmationModalClose={() => setIsConfirmationModalOpen(false)}
+						/>
+					)}
 					<div className="px-5 py-7 md:px-10 lg:px-25">
 						<div
 							className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5`}
@@ -39,6 +48,7 @@ const App: React.FC = () => {
 								assignedTo="suvajit@codewalnut.com"
 								priority="High"
 								markComplete={() => null}
+								deleteTicket={() => setIsConfirmationModalOpen(true)}
 							/>
 						</div>
 					</div>
