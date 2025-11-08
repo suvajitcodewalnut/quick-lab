@@ -4,7 +4,7 @@ import { vi } from "vitest";
 import {
 	setupDefaultMockups,
 	toggleSidebarMock,
-	useSidebarMock,
+	useSidebarStoreMock,
 } from "../../mocks/mock";
 import Sidebar from "./Sidebar";
 
@@ -23,7 +23,7 @@ describe("Sidebar", () => {
 	});
 
 	it("should render the sidebar with 'Dashboard' component", () => {
-		useSidebarMock.mockReturnValue({
+		useSidebarStoreMock.mockReturnValue({
 			isOpen: true,
 			toggleSidebar: toggleSidebarMock,
 		});

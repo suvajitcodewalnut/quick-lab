@@ -1,12 +1,12 @@
 // Modules
 import type React from "react";
 import { useScreenSize } from "../../hooks/useScreenSize";
-import { useSidebar } from "../../store/useSidebar";
+import { useSidebarStore } from "../../store/useSidebar";
 import Dashboard from "../Dashboard/Dashboard";
 
 const Sidebar: React.FC = () => {
 	const size = useScreenSize();
-	const { isOpen } = useSidebar();
+	const { isOpen } = useSidebarStore();
 
 	return (
 		<div

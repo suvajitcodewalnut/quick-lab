@@ -47,7 +47,7 @@ const App: React.FC = () => {
 								title="Login fix"
 								description="Users are unable to login to the application and redirected to the 404 error page"
 								assignedTo="suvajit@codewalnut.com"
-								priority="High"
+								priority="HIGH"
 								markComplete={() => null}
 								deleteTicket={() => setIsConfirmationModalOpen(true)}
 							/>

@@ -18,10 +18,13 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<TicketFormData>({ resolver: zod(TicketSchemaValidators) });
+	} = useForm<TicketFormData>({
+		resolver: zod(TicketSchemaValidators),
+	});
 
-	const onSubmit = () => {
+	const onSubmit = (data: TicketFormData) => {
 		toast.success("TICKET CREATED SUCCESSFULLY!");
+		console.log({ data });
 		onFormModalClose();
 	};
 
@@ -61,7 +64,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 							type="text"
 							id="title"
 							placeholder="Enter title..."
-							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
+							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-xs"
 						/>
 						{errors.title && (
 							<p className="text-red-500 text-xs flex items-center gap-2">
@@ -85,7 +88,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 							id="description"
 							placeholder="Enter description..."
 							rows={3}
-							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
+							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-xs"
 						/>
 						{errors.description && (
 							<p className="text-red-500 text-xs flex items-center gap-2">
@@ -109,7 +112,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 							type="email"
 							id="assignee"
 							placeholder="Enter email..."
-							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
+							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-xs"
 						/>
 						{errors.assignedTo && (
 							<p className="text-red-500 text-xs flex items-center gap-2">
@@ -132,7 +135,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 							type="text"
 							id="priority"
 							placeholder="Enter priority (e.g., High, Medium, Low)..."
-							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600"
+							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-xs"
 						/>
 						{errors.priority && (
 							<p className="text-red-500 text-xs flex items-center gap-2">

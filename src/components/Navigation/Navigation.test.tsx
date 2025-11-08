@@ -5,7 +5,7 @@ import {
 	setupDefaultMockups,
 	toggleSidebarMock,
 	useScreenSizeMock,
-	useSidebarMock,
+	useSidebarStoreMock,
 } from "../../mocks/mock";
 import Navigation from "./Navigation";
 
@@ -38,7 +38,7 @@ describe("Navigation", () => {
 	});
 
 	it("should show menu-icon when isOpen is false", () => {
-		useSidebarMock.mockReturnValue({
+		useSidebarStoreMock.mockReturnValue({
 			isOpen: false,
 			toggleSidebar: toggleSidebarMock,
 		});
@@ -51,7 +51,7 @@ describe("Navigation", () => {
 	});
 
 	it("should show menu-close-icon when isOpen is true", () => {
-		useSidebarMock.mockReturnValue({
+		useSidebarStoreMock.mockReturnValue({
 			isOpen: true,
 			toggleSidebar: toggleSidebarMock,
 		});
