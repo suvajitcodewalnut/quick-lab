@@ -9,13 +9,15 @@
 		"application:format": "biome check --write",
 		"build": "tsc -b && vite build",
 		"preview": "vite preview",
-		"prepare": "husky"
+		"prepare": "husky",
+		"application:check": "concurrently \"bun run application:test\" \"bun run application:format\""
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^5.2.2",
 		"@tailwindcss/vite": "^4.1.16",
 		"@testing-library/react-hooks": "^8.0.1",
 		"@vitest/coverage-v8": "^4.0.7",
+		"concurrently": "^9.2.1",
 		"motion": "^12.23.24",
 		"react": "^19.1.1",
 		"react-dom": "^19.1.1",
