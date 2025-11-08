@@ -14,7 +14,7 @@ const Card = ({
 	priority,
 	assignedTo,
 	isTicketResolved,
-	deleteTicket,
+	onDeleteTicket,
 }: CardPropTypes): JSX.Element => {
 	const { toggleTicketCompletion } = useTicketStore();
 
@@ -52,7 +52,7 @@ const Card = ({
 							type="button"
 							aria-label="button-delete"
 							title="Delete Task"
-							onClick={deleteTicket}
+							onClick={onDeleteTicket}
 							className="hover:text-red-500 text-white transition-colors"
 						>
 							<AiFillDelete size={22} />

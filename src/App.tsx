@@ -15,6 +15,7 @@ const App: React.FC = () => {
 	const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 	const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
 		useState<boolean>(false);
+	const [ticketID, setTicketID] = useState<string>("");
 
 	return (
 		<>
@@ -39,10 +40,18 @@ const App: React.FC = () => {
 					)}
 					{isConfirmationModalOpen && (
 						<Confirmation
+							selectedTicketID={ticketID}
 							onConfirmationModalClose={() => setIsConfirmationModalOpen(false)}
 						/>
 					)}
 					<div className="px-5 py-7 md:px-10 lg:px-25">
+						<div>
+							{tickets.length === 0 && (
+								<div className="mt-10 flex items-center justify-center text-gray-500">
+									NO TICKETS AVAILABLE
+								</div>
+							)}
+						</div>
 						<div
 							className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5`}
 						>
@@ -56,16 +65,21 @@ const App: React.FC = () => {
 											assignedTo={ticket.assignedTo}
 											priority={ticket.priority}
 											isTicketResolved={ticket.completed}
-											deleteTicket={() => setIsConfirmationModalOpen(true)}
+											onDeleteTicket={() => {
+												setIsConfirmationModalOpen(true);
+												setTicketID(ticket.id);
+											}}
 										/>
 									</div>
 								))}
 						</div>
 					</div>
 					<div>
-						<Button
-							onConfirmationModalOpen={() => setIsConfirmationModalOpen(true)}
-						/>
+						{tickets.length !== 0 && (
+							<Button
+								onConfirmationModalOpen={() => setIsConfirmationModalOpen(true)}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,6 @@ export interface CardPropTypes {
 	description: string;
 	priority: string;
 	assignedTo: string;
-	deleteTicket: () => void;
+	onDeleteTicket: () => void;
 	isTicketResolved: boolean;
 }
