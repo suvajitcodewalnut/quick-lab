@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { IoCloseCircle } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
+import { useTicketStore } from "../../../store/useTicket";
 import {
 	type TicketFormData,
 	TicketSchemaValidators,
@@ -14,6 +15,7 @@ import {
 import type { FormPropTypes } from "./Form.types";
 
 const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
+	const { addTicket } = useTicketStore();
 	const {
 		register,
 		handleSubmit,
@@ -23,8 +25,14 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 	});
 
 	const onSubmit = (data: TicketFormData) => {
+		addTicket(
+			data.title,
+			data.description,
+			data.priority,
+			data.assignedTo,
+			data.completed ?? false,
+		);
 		toast.success("TICKET CREATED SUCCESSFULLY!");
-		console.log({ data });
 		onFormModalClose();
 	};
 

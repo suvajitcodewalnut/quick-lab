@@ -1,8 +1,9 @@
 export interface CardPropTypes {
+	id: string;
 	title: string;
 	description: string;
 	priority: string;
 	assignedTo: string;
-	markComplete: () => void;
 	deleteTicket: () => void;
+	isTicketResolved: boolean;
 }
