@@ -1,6 +1,7 @@
 // Modules
 import type { JSX } from "react";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
+import { IoShapes } from "react-icons/io5";
 import { LuArrowRightToLine } from "react-icons/lu";
 import { PiTicketFill } from "react-icons/pi";
 import { useScreenSize } from "../../hooks/useScreenSize";
@@ -15,11 +16,7 @@ const Navigation = ({ onFormModalOpen }: NavigationPropTypes): JSX.Element => {
 		<div className="z-2000 sticky top-0 border-b-2 border-white py-3 px-3 md:px-20 lg:px-22 bg-[#050a12]  backdrop-blur-2xl">
 			<div className="flex items-center justify-between">
 				<div className="flex items-center justify-center gap-2 text-white font-semibold font-lg">
-					<img
-						className="w-8"
-						src="public\logo.png"
-						alt="application-quicklab-logo"
-					/>
+					<IoShapes size={30} className="text-blue-500" />
 					<h1 className="text-white font-bold text-2xl">QUICKLAB</h1>
 				</div>
 				<div className="flex items-center justify-center gap-3">
