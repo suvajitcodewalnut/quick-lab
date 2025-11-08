@@ -68,7 +68,7 @@ const Card = ({
 						>
 							{isTicketResolved ? (
 								<IoCloseCircle
-									size={18}
+									size={20}
 									className="text-green-500 hover:cursor-pointer"
 								/>
 							) : (

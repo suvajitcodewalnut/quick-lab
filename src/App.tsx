@@ -19,11 +19,12 @@ const App: React.FC = () => {
 	return (
 		<>
 			<Toaster
-				position="bottom-center"
+				position="bottom-left"
 				toastOptions={{
 					style: {
 						background: "#0b1220",
 						border: "2px solid white",
+						padding: "5px 10px",
 						color: "white",
 						borderRadius: "30px",
 					},
