@@ -3,13 +3,13 @@ import { vi } from "vitest";
 
 // Mock functions
 export const toggleSidebarMock = vi.fn();
-export const useSidebarMock = vi.fn();
+export const useSidebarStoreMock = vi.fn();
 export const useScreenSizeMock = vi.fn();
 export const toastSuccessMock = vi.fn();
 
 // Mock the modules
 vi.mock("../store/useSidebar", () => ({
-	useSidebar: () => useSidebarMock(),
+	useSidebarStore: () => useSidebarStoreMock(),
 }));
 
 vi.mock("../hooks/useScreenSize", () => ({
@@ -34,7 +34,7 @@ export function setupDefaultMockups() {
 	vi.clearAllMocks();
 
 	// Setup useSidebar default return value
-	useSidebarMock.mockReturnValue({
+	useSidebarStoreMock.mockReturnValue({
 		isOpen: false,
 		toggleSidebar: toggleSidebarMock,
 	});

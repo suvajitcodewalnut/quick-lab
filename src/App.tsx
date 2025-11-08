@@ -8,20 +8,24 @@ import Confirmation from "./components/Modal/Confirmation/Confirmation";
 import Form from "./components/Modal/Form/Form";
 import Navigation from "./components/Navigation/Navigation";
 import Sidebar from "./components/Sidebar/Sidebar";
+import { useTicketStore } from "./store/useTicket";
 
 const App: React.FC = () => {
+	const { tickets } = useTicketStore();
 	const [isFormModalOpen, setIsFormModalOpen] = useState<boolean>(false);
 	const [isConfirmationModalOpen, setIsConfirmationModalOpen] =
 		useState<boolean>(false);
+	const [ticketID, setTicketID] = useState<string>("");
 
 	return (
 		<>
 			<Toaster
-				position="bottom-center"
+				position="bottom-left"
 				toastOptions={{
 					style: {
 						background: "#0b1220",
 						border: "2px solid white",
+						padding: "5px 10px",
 						color: "white",
 						borderRadius: "30px",
 					},
@@ -36,27 +40,46 @@ const App: React.FC = () => {
 					)}
 					{isConfirmationModalOpen && (
 						<Confirmation
+							selectedTicketID={ticketID}
 							onConfirmationModalClose={() => setIsConfirmationModalOpen(false)}
 						/>
 					)}
 					<div className="px-5 py-7 md:px-10 lg:px-25">
+						<div>
+							{tickets.length === 0 && (
+								<div className="mt-10 flex items-center justify-center text-gray-500">
+									NO TICKETS AVAILABLE
+								</div>
+							)}
+						</div>
 						<div
 							className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5`}
 						>
-							<Card
-								title="Login fix"
-								description="Users are unable to login to the application and redirected to the 404 error page"
-								assignedTo="suvajit@codewalnut.com"
-								priority="High"
-								markComplete={() => null}
-								deleteTicket={() => setIsConfirmationModalOpen(true)}
-							/>
+							{tickets.length !== 0 &&
+								tickets.map((ticket) => (
+									<div key={ticket.id}>
+										<Card
+											id={ticket.id}
+											title={ticket.title}
+											description={ticket.description}
+											assignedTo={ticket.assignedTo}
+											priority={ticket.priority}
+											isTicketResolved={ticket.completed}
+											onDeleteTicket={() => {
+												setIsConfirmationModalOpen(true);
+												setTicketID(ticket.id);
+											}}
+										/>
+									</div>
+								))}
 						</div>
 					</div>
 					<div>
-						<Button
-							onConfirmationModalOpen={() => setIsConfirmationModalOpen(true)}
-						/>
+						{tickets.length !== 0 && (
+							<Button
+								onConfirmationModalOpen={() => setIsConfirmationModalOpen(true)}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

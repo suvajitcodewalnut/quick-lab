@@ -17,6 +17,7 @@ export const TicketSchemaValidators = z.object({
 		.refine((value) => ["HIGH", "MEDIUM", "LOW"].includes(value), {
 			message: "Priority must be either HIGH, MEDIUM or LOW",
 		}),
+	completed: z.boolean().default(false).optional(),
 });
 
 export type TicketFormData = z.infer<typeof TicketSchemaValidators>;

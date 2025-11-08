@@ -1,33 +1,58 @@
 // Modules
 import type { JSX } from "react";
+import toast from "react-hot-toast";
 import { AiFillDelete } from "react-icons/ai";
 import { FaCircleCheck } from "react-icons/fa6";
+import { IoCloseCircle } from "react-icons/io5";
+import { useTicketStore } from "../../store/useTicket";
 import type { CardPropTypes } from "./Card.types";
 
 const Card = ({
+	id,
 	title,
 	description,
 	priority,
 	assignedTo,
-	markComplete,
-	deleteTicket,
+	isTicketResolved,
+	onDeleteTicket,
 }: CardPropTypes): JSX.Element => {
+	const { toggleTicketCompletion } = useTicketStore();
+
+	//   Store handler function
+	const handleTicketCompletionStatusToggle = (
+		id: string,
+		isTicketResolved: boolean,
+	) => {
+		toggleTicketCompletion(id);
+		if (isTicketResolved) {
+			toast.success("TICKET REINITIALIZED!");
+		} else {
+			toast.success("TICKET RESOLVED!");
+		}
+	};
+
 	return (
-		<div className="flex flex-col justify-between h-full min-h-[200px] border-2 border-white bg-[#0b0f19] p-5 rounded-2xl hover:cursor-pointer hover:scale-[1.02] transition-all duration-200 shadow-lg sm:min-h-[220px] md:min-h-60 lg:min-h-[260px]">
+		<div
+			className={` ${
+				isTicketResolved ? "border-green-500" : "border-white"
+			} flex flex-col justify-between h-full min-h-[200px] border-2  bg-[#0b0f19] p-5 rounded-2xl hover:cursor-pointer hover:scale-[1.02] transition-all duration-200 shadow-lg sm:min-h-[220px] md:min-h-60 lg:min-h-[260px]`}
+		>
 			<div>
 				<div className="flex items-center justify-between mb-3">
 					<h2 className="text-white font-semibold text-xl truncate">{title}</h2>
 
 					<div className="flex items-center gap-3">
-						<span className="px-3 py-1 rounded-full bg-blue-800 text-white text-xs sm:text-sm font-semibold">
-							{priority}
-						</span>
+						{!isTicketResolved && (
+							<span className="px-3 py-1 rounded-full bg-blue-800 text-white text-xs sm:text-sm font-semibold">
+								{priority}
+							</span>
+						)}
 
 						<button
 							type="button"
 							aria-label="button-delete"
 							title="Delete Task"
-							onClick={deleteTicket}
+							onClick={onDeleteTicket}
 							className="hover:text-red-500 text-white transition-colors"
 						>
 							<AiFillDelete size={22} />
@@ -36,10 +61,22 @@ const Card = ({
 							type="button"
 							aria-label="button-mark-as-complete"
 							title="Mark Complete"
-							onClick={markComplete}
-							className="hover:text-green-500 text-white transition-colors"
+							onClick={() =>
+								handleTicketCompletionStatusToggle(id, isTicketResolved)
+							}
+							className=" text-white transition-colors"
 						>
-							<FaCircleCheck size={18} />
+							{isTicketResolved ? (
+								<IoCloseCircle
+									size={20}
+									className="text-green-500 hover:cursor-pointer"
+								/>
+							) : (
+								<FaCircleCheck
+									size={18}
+									className="hover:text-green-500 hover:cursor-pointer"
+								/>
+							)}
 						</button>
 					</div>
 				</div>

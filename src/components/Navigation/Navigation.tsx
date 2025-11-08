@@ -4,12 +4,12 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import { LuArrowRightToLine } from "react-icons/lu";
 import { PiTicketFill } from "react-icons/pi";
 import { useScreenSize } from "../../hooks/useScreenSize";
-import { useSidebar } from "../../store/useSidebar";
+import { useSidebarStore } from "../../store/useSidebar";
 import type { NavigationPropTypes } from "./Navigation.types";
 
 const Navigation = ({ onFormModalOpen }: NavigationPropTypes): JSX.Element => {
 	const size = useScreenSize();
-	const { isOpen, toggleSidebar } = useSidebar();
+	const { isOpen, toggleSidebar } = useSidebarStore();
 
 	return (
 		<div className="z-2000 sticky top-0 border-b-2 border-white py-3 px-3 md:px-20 lg:px-22 bg-[#050a12]  backdrop-blur-2xl">
