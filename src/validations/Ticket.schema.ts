@@ -13,10 +13,10 @@ export const TicketSchemaValidators = z.object({
 	assignedTo: z.email("Please provide a valid email address!"),
 	priority: z
 		.string()
-		.refine(
-			(value) => ["HIGH", "MEDIUM", "LOW"].includes(value.toUpperCase()),
-			{ message: "Priority must be either HIGH, MEDIUM or LOW" },
-		),
+		.transform((value) => value.toUpperCase())
+		.refine((value) => ["HIGH", "MEDIUM", "LOW"].includes(value), {
+			message: "Priority must be either HIGH, MEDIUM or LOW",
+		}),
 });
 
 export type TicketFormData = z.infer<typeof TicketSchemaValidators>;
