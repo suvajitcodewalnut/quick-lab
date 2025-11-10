@@ -2,6 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import { setupDefaultMockups } from "./mocks/mock";
 
 // Render
 const renderComponent = () => ({
@@ -28,6 +29,10 @@ vi.mock("./components/Sidebar/Sidebar.tsx", () => ({
 
 // Suite
 describe("App component", () => {
+	beforeEach(() => {
+		setupDefaultMockups();
+	});
+
 	it("should render the component correctly", () => {
 		renderComponent();
 	});

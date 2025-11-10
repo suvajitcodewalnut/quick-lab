@@ -1,7 +1,7 @@
 // Modules
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { toastSuccessMock } from "../../../mocks/mock";
+import { setupDefaultMockups, toastSuccessMock } from "../../../mocks/mock";
 import Form from "./Form";
 
 // Render
@@ -10,7 +10,7 @@ const renderComponent = () => render(<Form onFormModalClose={vi.fn()} />);
 // Suite
 describe("Form", () => {
 	beforeEach(() => {
-		vi.resetAllMocks();
+		setupDefaultMockups();
 	});
 
 	it("renders the form fields and submit button", () => {
