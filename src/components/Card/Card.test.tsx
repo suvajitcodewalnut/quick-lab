@@ -1,5 +1,6 @@
 // Modules
 import { render, screen } from "@testing-library/react";
+import { setupDefaultMockups } from "../../mocks/mock";
 import Card from "./Card";
 import type { CardPropTypes } from "./Card.types";
 
@@ -26,6 +27,10 @@ const renderComponent = (
 	);
 
 describe("Card", () => {
+	beforeEach(() => {
+		setupDefaultMockups();
+	});
+
 	it("should render the Card component properly", () => {
 		renderComponent(
 			"1",

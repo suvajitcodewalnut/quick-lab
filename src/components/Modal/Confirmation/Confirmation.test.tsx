@@ -1,6 +1,7 @@
 // Modules
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { setupDefaultMockups } from "../../../mocks/mock";
 import Confirmation from "./Confirmation";
 
 // Render
@@ -9,6 +10,10 @@ const renderComponent = (onClose = vi.fn()) =>
 
 // Suite
 describe("Confirmation", () => {
+	beforeEach(() => {
+		setupDefaultMockups();
+	});
+
 	it("should render the component correctly", () => {
 		renderComponent();
 	});

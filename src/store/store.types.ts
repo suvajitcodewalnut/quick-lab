@@ -26,7 +26,7 @@ export interface TicketStoreState {
 	toggleTicketCompletion: (id: string) => void;
 	clearAllExistingTickets: () => void;
 
-	totalTicketsCount: () => void;
-	totalCompletedTicketsCount: () => void;
-	totalRemainingTicketsCount: () => void;
+	totalTicketsCount: () => number;
+	totalCompletedTicketsCount: () => number;
+	totalRemainingTicketsCount: () => number;
 }

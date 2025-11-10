@@ -6,10 +6,22 @@ export const toggleSidebarMock = vi.fn();
 export const useSidebarStoreMock = vi.fn();
 export const useScreenSizeMock = vi.fn();
 export const toastSuccessMock = vi.fn();
+export const useTicketStoreMock = vi.fn();
+export const totalTicketsCountMock = vi.fn();
+export const totalCompletedTicketsCountMock = vi.fn();
+export const totalRemainingTicketsCountMock = vi.fn();
+export const addTicketMock = vi.fn();
+export const deleteTicketMock = vi.fn();
+export const toggleTicketCompletionMock = vi.fn();
+export const clearAllExistingTicketsMock = vi.fn();
 
 // Mock the modules
 vi.mock("../store/useSidebar", () => ({
 	useSidebarStore: () => useSidebarStoreMock(),
+}));
+
+vi.mock("../store/useTicket", () => ({
+	useTicketStore: () => useTicketStoreMock(),
 }));
 
 vi.mock("../hooks/useScreenSize", () => ({
@@ -43,5 +55,21 @@ export function setupDefaultMockups() {
 	useScreenSizeMock.mockReturnValue({
 		width: 1024,
 		height: 768,
+	});
+
+	// Setup useTicketStore default return value
+	totalTicketsCountMock.mockReturnValue(0);
+	totalCompletedTicketsCountMock.mockReturnValue(0);
+	totalRemainingTicketsCountMock.mockReturnValue(0);
+
+	useTicketStoreMock.mockReturnValue({
+		tickets: [],
+		addTicket: addTicketMock,
+		deleteTicket: deleteTicketMock,
+		toggleTicketCompletion: toggleTicketCompletionMock,
+		clearAllExistingTickets: clearAllExistingTicketsMock,
+		totalTicketsCount: totalTicketsCountMock,
+		totalCompletedTicketsCount: totalCompletedTicketsCountMock,
+		totalRemainingTicketsCount: totalRemainingTicketsCountMock,
 	});
 }
