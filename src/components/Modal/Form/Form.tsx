@@ -51,6 +51,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 					</h2>
 					<button
 						type="button"
+						id="button-form-close"
 						onClick={onFormModalClose}
 						className="text-gray-400 hover:text-red-500 hover:cursor-pointer transition"
 						aria-label="Close"
@@ -117,7 +118,7 @@ const Form = ({ onFormModalClose }: FormPropTypes): JSX.Element => {
 						</label>
 						<input
 							{...register("assignedTo")}
-							type="email"
+							type="text"
 							id="assignee"
 							placeholder="Enter email..."
 							className="w-full border border-neutral-700 bg-[#0b1220] text-white rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-blue-600 placeholder:text-xs"
